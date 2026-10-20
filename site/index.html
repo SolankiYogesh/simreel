@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SimReel: Use a Camera in the iOS Simulator on Mac</title>
+<meta name="description" content="SimReel gives the iOS Simulator a working camera. Feed images, video, QR codes or your Mac webcam to any app, with no code changes. Free and native.">
+<meta name="keywords" content="iOS Simulator camera, test camera in iOS Simulator, iOS Simulator webcam, fake camera iOS Simulator, QR code scanner iOS Simulator, virtual camera iOS Simulator, AVCaptureSession simulator, Xcode Simulator camera">
+<link rel="canonical" href="https://solankiyogesh.github.io/simreel/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="SolankiYogesh">
+<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:site_name" content="SimReel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SimReel: Use a Camera in the iOS Simulator on Mac">
+<meta property="og:description" content="SimReel gives the iOS Simulator a working camera. Feed images, video, QR codes or your Mac webcam to any app, with no code changes. Free and native.">
+<meta property="og:url" content="https://solankiyogesh.github.io/simreel/">
+<meta property="og:image" content="https://solankiyogesh.github.io/simreel/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SimReel: a working camera for the iOS Simulator on Mac">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SimReel: Use a Camera in the iOS Simulator on Mac">
+<meta name="twitter:description" content="SimReel gives the iOS Simulator a working camera. Feed images, video, QR codes or your Mac webcam to any app, with no code changes. Free and native.">
+<meta name="twitter:image" content="https://solankiyogesh.github.io/simreel/assets/og-image.png">
+<link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SimReel","alternateName":"SimReel for macOS","description":"SimReel gives the iOS Simulator a working camera. Feed images, video, QR codes or your Mac webcam to the front and back cameras of any simulator app, with no code changes.","applicationCategory":"DeveloperApplication","applicationSubCategory":"iOS Simulator camera tool","operatingSystem":"macOS 14 or later (Apple Silicon)","url":"https://solankiyogesh.github.io/simreel/","downloadUrl":"https://github.com/SolankiYogesh/simreel/releases/latest","installUrl":"https://github.com/SolankiYogesh/simreel/releases/latest","screenshot":"https://solankiyogesh.github.io/simreel/assets/screenshot-light.png","image":"https://solankiyogesh.github.io/simreel/assets/og-image.png","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"programmingLanguage":"Rust","author":{"@type":"Person","name":"SolankiYogesh","url":"https://github.com/SolankiYogesh"},"featureList":["Front and back cameras for the iOS Simulator","Image, video, QR code, Mac webcam and phone camera sources","Phone camera streaming over Wi-Fi, no app needed on the phone","Live preview and instant apply","Automatic setup for booted simulators","Command-line tool for scripts and UI tests","QR and barcode scanning, photo capture, video frame callbacks"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SimReel","url":"https://solankiyogesh.github.io/simreel/","description":"A working camera for the iOS Simulator on Mac.","inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the iOS Simulator have a camera?","acceptedAnswer":{"@type":"Answer","text":"No. The iOS Simulator has no camera, so capture sessions find no devices and camera screens stay blank or show an error. SimReel adds a front and a back camera to the Simulator and feeds them the image, video, QR code or Mac webcam you choose."}},{"@type":"Question","name":"How do I use my Mac webcam in the iOS Simulator?","acceptedAnswer":{"@type":"Answer","text":"Open SimReel, choose the Mac camera source and pick your camera. The first time, macOS asks for camera permission. Your simulator apps then receive the live webcam frames through the normal AVFoundation capture APIs."}},{"@type":"Question","name":"Can I test QR code scanning in the iOS Simulator?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose the QR code source and enter any text or URL, or use an image or video that contains a QR code. Apps that scan with AVCaptureMetadataOutput receive the decoded value in their metadata callback, as they would on a device."}},{"@type":"Question","name":"Do I need to change my app's code?","acceptedAnswer":{"@type":"Answer","text":"No. SimReel works with unmodified apps: it loads into simulator apps at launch and answers the camera APIs your app already calls. There is no SDK to install and no build setting to change. Relaunch an app that was already running."}},{"@type":"Question","name":"Does SimReel work with React Native, Expo or Flutter?","acceptedAnswer":{"@type":"Answer","text":"These frameworks use AVFoundation for the camera on iOS, so libraries such as react-native-vision-camera, expo-camera, the Flutter camera plugin and mobile_scanner sit on the same APIs SimReel supports. SimReel itself is verified with a native AVFoundation app (preview, video frames, QR scanning and photo capture); these libraries have not been individually tested yet, and video recording and device-format lookups are not supported yet. See the compatibility list for details, and reports are welcome on GitHub."}},{"@type":"Question","name":"Which camera libraries does SimReel work with?","acceptedAnswer":{"@type":"Answer","text":"Any library that captures through AVFoundation's capture APIs: for React Native, react-native-vision-camera, expo-camera, react-native-camera-kit and react-native-webrtc; for Swift, AVFoundation, Vision, Google ML Kit, BarcodeScanner, SwiftyCam, CameraManager, YPImagePicker, GPUImage and WebRTC SDKs; for Flutter, camera, mobile_scanner, camerawesome, qr_code_scanner and flutter_webrtc. Known gaps: video recording, device formats, libraries that skip the camera in the Simulator, system camera screens and ARKit."}},{"@type":"Question","name":"Which Macs, Xcode and iOS versions are supported?","acceptedAnswer":{"@type":"Answer","text":"SimReel needs macOS 14 or later on an Apple Silicon Mac, with Xcode and the iOS Simulator installed. It was tested with macOS 27, Xcode 27.1 and an iOS 26.5 simulator. Intel Macs are not supported yet."}},{"@type":"Question","name":"How do I install SimReel with Homebrew?","acceptedAnswer":{"@type":"Answer","text":"Run brew install --cask SolankiYogesh/tap/simreel. This installs SimReel.app into Applications and adds the simreel command-line tool to your PATH. Update later with brew upgrade --cask simreel."}},{"@type":"Question","name":"Can I use my phone's camera in the iOS Simulator?","acceptedAnswer":{"@type":"Answer","text":"Yes. Turn on phone cameras in SimReel, scan the QR code with your phone, and open the page in Safari or Chrome. Your phone's camera then streams over Wi-Fi to the Simulator. No app is needed on the phone, and both devices must be on the same network. It has been verified with a simulated phone; real iPhone and Android browsers are expected to work, and reports are welcome."}},{"@type":"Question","name":"Is SimReel free, and is it private?","acceptedAnswer":{"@type":"Answer","text":"SimReel is free to use. It runs on your Mac, makes no outgoing network connections and collects no data. The optional phone-camera listener is off until you turn it on, uses a random link, and sends nothing to the internet."}},{"@type":"Question","name":"Does it work on real iPhones, iPads or the Android Emulator?","acceptedAnswer":{"@type":"Answer","text":"No. Real devices already have cameras, and SimReel is built for the iOS Simulator, which only exists on macOS."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="./"><img src="assets/logo.png" width="32" height="32" alt="SimReel logo"><span>SimReel</span></a>
+<nav class="main" aria-label="Main">
+<a href="#features">Features</a>
+<a href="#how-it-works">How it works</a>
+<a href="#compatibility">Compatibility</a>
+<a href="#platform-support">Platform support</a>
+<a href="#faq">FAQ</a>
+<a href="guides/ios-simulator-camera/">Guides</a>
+<a href="https://github.com/SolankiYogesh/simreel/issues">Feedback</a>
+<a class="btn primary small" href="https://github.com/SolankiYogesh/simreel/releases/latest">Download</a>
+</nav></div></header>
+<main id="main">
+
+<section class="hero">
+<div class="wrap">
+<h1>A working <span>camera for the iOS Simulator</span></h1>
+<p class="lead">SimReel feeds any image, video, QR code or your Mac&rsquo;s webcam to the front and back cameras of your simulators &mdash; with no changes to your app.</p>
+<div class="cta">
+<a class="btn primary" href="https://github.com/SolankiYogesh/simreel/releases/latest">Download for macOS</a>
+<a class="btn ghost" href="https://github.com/SolankiYogesh/simreel/issues/new/choose">Share feedback</a>
+</div>
+<p class="fine">Free &middot; macOS 14+ on Apple Silicon</p>
+<div class="shot"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/screenshot-dark.png"><img src="assets/screenshot-light.png" width="1600" height="1074" alt="SimReel window showing the booted iOS simulator with its camera active, the source controls and a live camera preview" fetchpriority="high"></picture></div>
+</div>
+</section>
+
+<section id="why">
+<div class="wrap">
+<h2>The iOS Simulator has no camera. Now it does.</h2>
+<p class="sub">Anything that opens a capture session &mdash; barcode scanners, document and ID capture, profile photos, video calls, onboarding flows &mdash; shows a blank screen or an error in the Simulator, so camera changes end up tested on a physical device. SimReel puts a camera back, and you decide what it sees.</p>
+</div>
+</section>
+
+<section id="features" class="alt">
+<div class="wrap">
+<h2>Everything you need to test camera features</h2>
+<p class="sub">Built as a small native app, with the controls developers actually reach for.</p>
+<div class="grid">
+<div class="card"><h3>Front and back cameras</h3><p>Show a QR code on one camera and a video on the other. Each camera has its own source.</p></div>
+<div class="card"><h3>Image, video, QR or webcam</h3><p>PNG and JPEG images, MP4/MOV video (looped, rotation-aware), any QR text or URL, or your Mac camera.</p></div>
+<div class="card"><h3>Your phone as a camera</h3><p>Scan a QR code and stream your phone&rsquo;s camera over Wi-Fi. No app to install &mdash; it runs in the phone&rsquo;s browser.</p></div>
+<div class="card"><h3>Portrait and landscape</h3><p>Portrait photos, videos and phone streams stay portrait instead of being cropped.</p></div>
+<div class="card"><h3>Fill or fit</h3><p>Crop to fill the frame, or letterbox with 0&ndash;30&nbsp;% padding and a background colour of your choice.</p></div>
+<div class="card"><h3>Live preview, instant apply</h3><p>See exactly what your app receives. Changes reach your simulators as you make them &mdash; no Apply button.</p></div>
+<div class="card"><h3>Zero setup per simulator</h3><p>SimReel enables itself on every booted simulator, including ones you boot later, and cleans up when you quit.</p></div>
+<div class="card"><h3>Works with unmodified apps</h3><p>Preview layers, video frame callbacks, photo capture and QR scanning behave like a real camera. No SDK, no code changes.</p></div>
+<div class="card"><h3>Lives in the menu bar</h3><p>A menu bar icon shows when SimReel is active, with status, a Wi-Fi camera switch and Quit. Close the window and it keeps running.</p></div>
+<div class="card"><h3>Scriptable</h3><p>A <code>simreel</code> command-line tool sets sources from scripts and UI-test setup.</p></div>
+<div class="card"><h3>Private by design</h3><p>Runs on your Mac. No outgoing connections, no telemetry, no account. The phone listener is off until you turn it on.</p></div>
+</div>
+</div>
+</section>
+
+<section id="how-it-works">
+<div class="wrap">
+<h2>How it works</h2>
+<p class="sub">Three steps from download to a working simulator camera.</p>
+<ol class="steps">
+<li><h3>Open SimReel</h3><p>Your booted simulators appear in the window and are enabled automatically.</p></li>
+<li><h3>Run your app</h3><p>Launch your app in the Simulator and open its camera screen. Relaunch apps that were already running.</p></li>
+<li><h3>Pick a source</h3><p>Choose an image, video, QR code or your Mac camera. The app sees it immediately.</p></li>
+</ol>
+</div>
+</section>
+
+<section id="camera-apis" class="alt">
+<div class="wrap">
+<h2>Supported camera APIs</h2>
+<p class="sub">SimReel answers the AVFoundation capture APIs your app already uses.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>API</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><code>AVCaptureDevice</code> discovery</td><td>Supported &mdash; front and back wide-angle cameras</td></tr>
+<tr><td><code>AVCaptureSession</code> and <code>AVCaptureDeviceInput</code></td><td>Supported</td></tr>
+<tr><td><code>AVCaptureVideoPreviewLayer</code></td><td>Supported, honours <code>videoGravity</code></td></tr>
+<tr><td><code>AVCaptureVideoDataOutput</code></td><td>Supported &mdash; BGRA and NV12, 1280&times;720 (or 720&times;1280) at up to 30&nbsp;fps</td></tr>
+<tr><td><code>AVCaptureMetadataOutput</code></td><td>QR codes verified; other barcode types best-effort</td></tr>
+<tr><td><code>AVCapturePhotoOutput</code></td><td>Supported &mdash; JPEG at the frame size</td></tr>
+<tr><td>Flash, torch, zoom, focus, exposure</td><td>Accepted and ignored</td></tr>
+<tr><td><code>AVCaptureMovieFileOutput</code>, depth data, Live Photos, ARKit</td><td>Not supported</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+<section id="compatibility">
+<div class="wrap">
+<h2>Works with the camera libraries you already use</h2>
+<p class="sub">SimReel works at the AVFoundation layer that iOS camera code is built on, so apps and libraries that capture through the supported APIs see a working camera &mdash; no code changes. It is verified with a native AVFoundation sample app; the libraries below sit on the same APIs but have not been individually tested yet. <a href="https://github.com/SolankiYogesh/simreel#compatibility">See what each one builds on</a>, and <a href="https://github.com/SolankiYogesh/simreel/issues">tell us how yours behaves</a>.</p>
+<div class="grid">
+<div class="card"><h3>React Native &amp; Expo</h3><p><code>react-native-vision-camera</code>, <code>expo-camera</code>, <code>react-native-camera-kit</code>, <code>react-native-camera</code>, <code>react-native-qrcode-scanner</code>, <code>react-native-webrtc</code></p></div>
+<div class="card"><h3>Swift &amp; Objective-C</h3><p>AVFoundation, Vision, Google ML Kit, <code>BarcodeScanner</code>, <code>CodeScanner</code>, <code>SwiftyCam</code>, <code>CameraManager</code>, <code>YPImagePicker</code>, <code>GPUImage</code>, WebRTC SDKs (Twilio, Agora, Stream, LiveKit, Daily, Jitsi)</p></div>
+<div class="card"><h3>Flutter</h3><p><code>camera</code>, <code>mobile_scanner</code>, <code>camerawesome</code>, <code>qr_code_scanner</code>, <code>barcode_scan2</code>, <code>google_mlkit_*</code>, <code>flutter_webrtc</code>, <code>agora_rtc_engine</code>, <code>livekit_client</code></p></div>
+</div>
+<div class="callout" style="margin-top:1.2rem"><p><strong>What to watch for:</strong> video recording through <code>AVCaptureMovieFileOutput</code>, libraries that read device formats (<code>AVCaptureDevice.formats</code>), libraries that deliberately skip the camera in the Simulator, system camera screens (<code>UIImagePickerController</code>) and ARKit are not covered yet.</p></div>
+</div>
+</section>
+
+<section id="platform-support" class="alt">
+<div class="wrap">
+<h2>Platform support</h2>
+<p class="sub">SimReel is a macOS app for the iOS Simulator.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Area</th><th>Support</th></tr></thead>
+<tbody>
+<tr><td>Host Mac</td><td>macOS 14 (Sonoma) or later on <strong>Apple Silicon</strong> (M1 and newer). Intel Macs are not supported yet.</td></tr>
+<tr><td>Required tools</td><td>Xcode with the iOS Simulator (SimReel uses <code>xcrun simctl</code>).</td></tr>
+<tr><td>Simulators</td><td>iOS Simulator on Apple Silicon &mdash; iPhone and iPad runtimes.</td></tr>
+<tr><td>Apps</td><td>Native iOS apps (Swift, Objective-C) using AVFoundation capture APIs.</td></tr>
+<tr><td>Phone camera source</td><td>A phone with a current browser on the same Wi-Fi &mdash; Safari on iPhone, Chrome on Android. Verified with a simulated phone; real phones are expected to work.</td></tr>
+<tr><td>React Native, Expo, Flutter, Capacitor</td><td>Built on AVFoundation. See <a href="#compatibility">Compatibility</a> for the libraries and what to watch for.</td></tr>
+<tr><td>Windows, Linux, Android Emulator, physical devices</td><td>Not applicable &mdash; the iOS Simulator only runs on macOS, and real devices already have cameras.</td></tr>
+</tbody></table></div>
+<p class="fine" style="margin-top:.8rem">Tested with macOS 27, Xcode 27.1 and an iOS 26.5 simulator on Apple Silicon.</p>
+</div>
+</section>
+
+<section id="cli" class="alt">
+<div class="wrap">
+<h2>Drive it from the command line</h2>
+<p class="sub">The <code>simreel</code> tool ships inside the app and controls the running app &mdash; handy for scripts and UI-test setup.</p>
+<pre><code># Show a QR code on the back camera and a video on the front camera
+simreel set-source --back  --qr "https://example.com/ticket/42"
+simreel set-source --front --video ~/Movies/walkthrough.mp4
+
+# Use an image, letterboxed with padding
+simreel set-source --image id-card.png --fit --fit-padding 10 --background-color "#FFFFFF"
+
+# Use your Mac camera
+simreel set-source --camera
+
+# Use your phone's camera over Wi-Fi
+simreel phone on
+simreel set-source --remote "iPhone"</code></pre>
+</div>
+</section>
+
+<section id="guides">
+<div class="wrap">
+<h2>Guides</h2>
+<p class="sub">Step-by-step help for common camera testing tasks.</p>
+<div class="grid">
+<a class="card" href="guides/ios-simulator-camera/" style="text-decoration:none;color:inherit"><h3>How to use a camera in the iOS Simulator</h3><p>Why the Simulator has no camera, and how to give your app images, video or your webcam to test with.</p></a>
+<a class="card" href="guides/test-qr-scanning-ios-simulator/" style="text-decoration:none;color:inherit"><h3>How to test QR code scanning in the iOS Simulator</h3><p>Show any QR code to your scanner and read the decoded value in your metadata delegate.</p></a>
+<a class="card" href="guides/use-phone-camera-ios-simulator/" style="text-decoration:none;color:inherit"><h3>Use your phone&rsquo;s camera in the iOS Simulator</h3><p>Stream an iPhone or Android camera over Wi-Fi to your simulator apps, with no app on the phone.</p></a>
+</div>
+</div>
+</section>
+
+<section id="faq" class="alt">
+<div class="wrap">
+<h2>Frequently asked questions</h2>
+<p class="sub">Quick answers about SimReel and the iOS Simulator camera.</p>
+<details><summary>Does the iOS Simulator have a camera?</summary><p>No. The iOS Simulator has no camera, so capture sessions find no devices and camera screens stay blank or show an error. SimReel adds a front and a back camera to the Simulator and feeds them the image, video, QR code or Mac webcam you choose.</p></details>
+<details><summary>How do I use my Mac webcam in the iOS Simulator?</summary><p>Open SimReel, choose the Mac camera source and pick your camera. The first time, macOS asks for camera permission. Your simulator apps then receive the live webcam frames through the normal AVFoundation capture APIs.</p></details>
+<details><summary>Can I test QR code scanning in the iOS Simulator?</summary><p>Yes. Choose the QR code source and enter any text or URL, or use an image or video that contains a QR code. Apps that scan with AVCaptureMetadataOutput receive the decoded value in their metadata callback, as they would on a device.</p></details>
+<details><summary>Do I need to change my app&#x27;s code?</summary><p>No. SimReel works with unmodified apps: it loads into simulator apps at launch and answers the camera APIs your app already calls. There is no SDK to install and no build setting to change. Relaunch an app that was already running.</p></details>
+<details><summary>Does SimReel work with React Native, Expo or Flutter?</summary><p>These frameworks use AVFoundation for the camera on iOS, so libraries such as react-native-vision-camera, expo-camera, the Flutter camera plugin and mobile_scanner sit on the same APIs SimReel supports. SimReel itself is verified with a native AVFoundation app (preview, video frames, QR scanning and photo capture); these libraries have not been individually tested yet, and video recording and device-format lookups are not supported yet. See the compatibility list for details, and reports are welcome on GitHub.</p></details>
+<details><summary>Which camera libraries does SimReel work with?</summary><p>Any library that captures through AVFoundation&#x27;s capture APIs: for React Native, react-native-vision-camera, expo-camera, react-native-camera-kit and react-native-webrtc; for Swift, AVFoundation, Vision, Google ML Kit, BarcodeScanner, SwiftyCam, CameraManager, YPImagePicker, GPUImage and WebRTC SDKs; for Flutter, camera, mobile_scanner, camerawesome, qr_code_scanner and flutter_webrtc. Known gaps: video recording, device formats, libraries that skip the camera in the Simulator, system camera screens and ARKit.</p></details>
+<details><summary>Which Macs, Xcode and iOS versions are supported?</summary><p>SimReel needs macOS 14 or later on an Apple Silicon Mac, with Xcode and the iOS Simulator installed. It was tested with macOS 27, Xcode 27.1 and an iOS 26.5 simulator. Intel Macs are not supported yet.</p></details>
+<details><summary>How do I install SimReel with Homebrew?</summary><p>Run brew install --cask SolankiYogesh/tap/simreel. This installs SimReel.app into Applications and adds the simreel command-line tool to your PATH. Update later with brew upgrade --cask simreel.</p></details>
+<details><summary>Can I use my phone&#x27;s camera in the iOS Simulator?</summary><p>Yes. Turn on phone cameras in SimReel, scan the QR code with your phone, and open the page in Safari or Chrome. Your phone&#x27;s camera then streams over Wi-Fi to the Simulator. No app is needed on the phone, and both devices must be on the same network. It has been verified with a simulated phone; real iPhone and Android browsers are expected to work, and reports are welcome.</p></details>
+<details><summary>Is SimReel free, and is it private?</summary><p>SimReel is free to use. It runs on your Mac, makes no outgoing network connections and collects no data. The optional phone-camera listener is off until you turn it on, uses a random link, and sends nothing to the internet.</p></details>
+<details><summary>Does it work on real iPhones, iPads or the Android Emulator?</summary><p>No. Real devices already have cameras, and SimReel is built for the iOS Simulator, which only exists on macOS.</p></details>
+</div>
+</section>
+
+<section id="download">
+<div class="wrap" style="text-align:center">
+<h2>Give your Simulator a camera</h2>
+<p class="sub" style="margin-inline:auto">Install with Homebrew, or download the app, drag it to Applications and open it. That&rsquo;s the whole setup.</p>
+<pre style="max-width:34rem;margin:0 auto 1.2rem;text-align:left"><code>brew install --cask SolankiYogesh/tap/simreel</code></pre>
+<div class="cta"><a class="btn primary" href="https://github.com/SolankiYogesh/simreel/releases/latest">Download for macOS</a><a class="btn ghost" href="https://github.com/SolankiYogesh/simreel/issues/new/choose">Share feedback</a></div>
+<p class="fine">Release builds are signed ad hoc. If macOS says the app can&rsquo;t be verified, right-click it and choose Open.</p>
+</div>
+</section>
+
+</main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>SimReel</h4><p>A working camera for the iOS Simulator on Mac. Free to use.</p></div>
+<div><h4>Guides</h4><ul>
+<li><a href="guides/ios-simulator-camera/">Use a camera in the iOS Simulator</a></li>
+<li><a href="guides/test-qr-scanning-ios-simulator/">Test QR scanning in the iOS Simulator</a></li>
+<li><a href="guides/use-phone-camera-ios-simulator/">Use your phone's camera in the iOS Simulator</a></li>
+</ul></div>
+<div><h4>Project</h4><ul>
+<li><a href="https://github.com/SolankiYogesh/simreel/releases/latest">Download the latest release</a></li>
+<li><a href="https://github.com/SolankiYogesh/simreel/issues/new/choose">Report an issue or share feedback</a></li>
+</ul></div>
+</div>
+<p class="copy">&copy; 2026 SolankiYogesh. SimReel is free to use. Apple, iOS, Xcode and Simulator are trademarks of Apple Inc.; SimReel is an independent project.</p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,40 @@
+name: Bug report
+description: Something in SimReel doesn't work as expected
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what you saw instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: SimReel version
+      placeholder: "0.2.1 (the number in the downloaded file name)"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS and Xcode versions
+      placeholder: "macOS 15.4, Xcode 16.3"
+    validations:
+      required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: Camera source in use
+      options: [Image, Video, QR code, Mac camera, Wi-Fi camera (phone), Not sure]
+  - type: input
+    id: app
+    attributes:
+      label: App or library that uses the camera
+      placeholder: "SwiftUI + AVFoundation, react-native-vision-camera 4.x, Flutter camera 0.11, ..."
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Screenshots, console output or `simreel status` output help.

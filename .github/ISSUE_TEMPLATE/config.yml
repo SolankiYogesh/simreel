@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Website and guides
+    url: https://solankiyogesh.github.io/simreel/
+    about: Setup guides for QR scanning, phone cameras and the iOS Simulator camera.

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Use Your Phone&#x27;s Camera in the iOS Simulator</title>
+<meta name="description" content="Stream an iPhone or Android camera over Wi-Fi to the iOS Simulator with SimReel. No app on the phone: scan a QR code and your simulator apps see a real camera.">
+<meta name="keywords" content="use phone camera in iOS Simulator, iPhone camera iOS Simulator, stream phone camera to simulator, Android camera iOS Simulator">
+<link rel="canonical" href="https://solankiyogesh.github.io/simreel/guides/use-phone-camera-ios-simulator/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="SolankiYogesh">
+<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="../../assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta property="og:site_name" content="SimReel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Use Your Phone&#x27;s Camera in the iOS Simulator">
+<meta property="og:description" content="Stream an iPhone or Android camera over Wi-Fi to the iOS Simulator with SimReel. No app on the phone: scan a QR code and your simulator apps see a real camera.">
+<meta property="og:url" content="https://solankiyogesh.github.io/simreel/guides/use-phone-camera-ios-simulator/">
+<meta property="og:image" content="https://solankiyogesh.github.io/simreel/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SimReel: a working camera for the iOS Simulator on Mac">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Use Your Phone&#x27;s Camera in the iOS Simulator">
+<meta name="twitter:description" content="Stream an iPhone or Android camera over Wi-Fi to the iOS Simulator with SimReel. No app on the phone: scan a QR code and your simulator apps see a real camera.">
+<meta name="twitter:image" content="https://solankiyogesh.github.io/simreel/assets/og-image.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Use your phone's camera in the iOS Simulator","description":"Stream an iPhone or Android camera over Wi-Fi to the iOS Simulator with SimReel. No app on the phone: scan a QR code and your simulator apps see a real camera.","url":"https://solankiyogesh.github.io/simreel/guides/use-phone-camera-ios-simulator/","mainEntityOfPage":"https://solankiyogesh.github.io/simreel/guides/use-phone-camera-ios-simulator/","datePublished":"2026-10-19","dateModified":"2026-10-19","inLanguage":"en","image":"https://solankiyogesh.github.io/simreel/assets/og-image.png","author":{"@type":"Person","name":"SolankiYogesh","url":"https://github.com/SolankiYogesh"},"publisher":{"@type":"Person","name":"SolankiYogesh","url":"https://github.com/SolankiYogesh"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SimReel","item":"https://solankiyogesh.github.io/simreel/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://solankiyogesh.github.io/simreel/guides/ios-simulator-camera/"},{"@type":"ListItem","position":3,"name":"Phone camera","item":"https://solankiyogesh.github.io/simreel/guides/use-phone-camera-ios-simulator/"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../"><img src="../../assets/logo.png" width="32" height="32" alt="SimReel logo"><span>SimReel</span></a>
+<nav class="main" aria-label="Main">
+<a href="../../#features">Features</a>
+<a href="../../#how-it-works">How it works</a>
+<a href="../../#compatibility">Compatibility</a>
+<a href="../../#platform-support">Platform support</a>
+<a href="../../#faq">FAQ</a>
+<a href="../../guides/ios-simulator-camera/">Guides</a>
+<a href="https://github.com/SolankiYogesh/simreel/issues">Feedback</a>
+<a class="btn primary small" href="https://github.com/SolankiYogesh/simreel/releases/latest">Download</a>
+</nav></div></header>
+<main id="main">
+
+<article class="doc"><div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">SimReel</a> &rsaquo; Guides &rsaquo; Phone camera</nav>
+<h1>Use your phone&rsquo;s camera in the iOS Simulator</h1>
+<p class="lead">Test with real faces, documents and codes without leaving the Simulator. SimReel streams your phone&rsquo;s camera to your Mac over Wi-Fi &mdash; the phone only needs a browser.</p>
+
+<h2>What you need</h2>
+<ul>
+<li>SimReel installed on your Mac (macOS 14+, Apple Silicon, Xcode with the iOS Simulator).</li>
+<li>A phone with a current browser &mdash; Safari on iPhone or Chrome on Android.</li>
+<li>Both on the <strong>same Wi-Fi network</strong>. Guest or isolated networks that block devices from talking to each other won&rsquo;t work.</li>
+</ul>
+
+<h2>Connect your phone</h2>
+<ol>
+<li>Open SimReel and choose the <strong>Wi-Fi camera</strong> source, then press <strong>Turn on phone cameras</strong>.</li>
+<li>Scan the QR code with your phone&rsquo;s camera app and open the link.</li>
+<li>The first time, the phone warns that the connection isn&rsquo;t private. That&rsquo;s because your Mac uses its own certificate. Tap <strong>Show Details</strong> and visit the website (on Android: <strong>Advanced</strong>, then <strong>Proceed</strong>). Browsers require HTTPS for camera access, which is why the certificate exists.</li>
+<li>On the page, tap <strong>Start camera</strong> and allow camera access. Choose the back or front camera and the quality.</li>
+<li>Your phone appears in the <strong>Phones</strong> list in SimReel. Select it &mdash; your simulator apps now receive its camera.</li>
+</ol>
+<div class="callout"><p>macOS may ask whether SimReel can accept incoming network connections. Choose <strong>Allow</strong>. Keep the phone page open and the screen on while streaming.</p></div>
+
+<h2>From the command line</h2>
+<pre><code>simreel phone on        # starts the listener and prints the link
+simreel devices         # phones that have connected
+simreel set-source --remote "iPhone"
+simreel phone off</code></pre>
+
+<h2>Is it safe?</h2>
+<ul>
+<li>The listener is <strong>off by default</strong> and stops when you turn it off or quit SimReel.</li>
+<li>Every link includes a random token that changes each time you turn it on; requests without it are refused.</li>
+<li>Frames travel only to your Mac, and nothing is sent to the internet.</li>
+</ul>
+
+<h2>Portrait and landscape</h2>
+<p>Hold the phone upright and the Simulator gets portrait frames; turn it sideways and it gets landscape. Portrait sources are not cropped to landscape.</p>
+
+<h2>Troubleshooting</h2>
+<ul>
+<li><strong>The phone can&rsquo;t open the link.</strong> Check both devices are on the same network, phone cameras are on in SimReel, and you allowed incoming connections.</li>
+<li><strong>The camera won&rsquo;t start.</strong> Use Safari (iPhone) or Chrome (Android), accept the certificate warning and allow camera access.</li>
+<li><strong>Choppy video.</strong> Pick <em>Light (480p)</em> on the phone page, or move closer to the router.</li>
+<li><strong>Apps still show no camera.</strong> Make sure the simulator shows <em>Camera active</em> in SimReel and relaunch your app.</li>
+</ul>
+<p>This feature has been verified with a simulated phone. Real iPhone and Android browsers are expected to work &mdash; please <a href="https://github.com/SolankiYogesh/simreel/issues">report what you find</a>. For a broader introduction, see <a href="../ios-simulator-camera/">how to use a camera in the iOS Simulator</a>.</p>
+<div class="cta-box">
+<h2 style="margin-top:0">Try it with your own app</h2>
+<p>SimReel is free. Download it, open it, and your simulators get a camera.</p>
+<div class="cta"><a class="btn primary" href="https://github.com/SolankiYogesh/simreel/releases/latest">Download SimReel</a><a class="btn ghost" href="https://github.com/SolankiYogesh/simreel/issues/new/choose">Share feedback</a></div>
+</div>
+</div></article>
+
+</main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>SimReel</h4><p>A working camera for the iOS Simulator on Mac. Free to use.</p></div>
+<div><h4>Guides</h4><ul>
+<li><a href="../../guides/ios-simulator-camera/">Use a camera in the iOS Simulator</a></li>
+<li><a href="../../guides/test-qr-scanning-ios-simulator/">Test QR scanning in the iOS Simulator</a></li>
+<li><a href="../../guides/use-phone-camera-ios-simulator/">Use your phone's camera in the iOS Simulator</a></li>
+</ul></div>
+<div><h4>Project</h4><ul>
+<li><a href="https://github.com/SolankiYogesh/simreel/releases/latest">Download the latest release</a></li>
+<li><a href="https://github.com/SolankiYogesh/simreel/issues/new/choose">Report an issue or share feedback</a></li>
+</ul></div>
+</div>
+<p class="copy">&copy; 2026 SolankiYogesh. SimReel is free to use. Apple, iOS, Xcode and Simulator are trademarks of Apple Inc.; SimReel is an independent project.</p>
+</div></footer>
+</body>
+</html>

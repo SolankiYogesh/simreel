@@ -1,0 +1,29 @@
+name: Compatibility report
+description: Tell us whether a camera library or framework works with SimReel
+labels: ["compatibility"]
+body:
+  - type: input
+    id: lib
+    attributes:
+      label: Library or framework and version
+      placeholder: "react-native-vision-camera 4.6, expo-camera 16, Flutter camera 0.11, mobile_scanner 6, ..."
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options: [Works, Partly works, Doesn't work]
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What did you try and what happened?
+      description: Preview, scanning, photo capture, front and back cameras, and the SimReel source you used.
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: SimReel, macOS and Xcode versions
