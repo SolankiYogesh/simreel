@@ -1,0 +1,10 @@
+{
+  "version": "0.3.0",
+  "url": "https://solankiyogesh.github.io/simreel/download/v0.3.0/SimReel-0.3.0-arm64.dmg",
+  "sha256": "42ac4d745f732f8d96fd5f0330c20dd98d77e3b61bf65d551f069792c60946b4",
+  "size": 13101392,
+  "notes": "SimReel now tells you when a new version is out, and can install it for you.\n\n- Updates: SimReel checks once a day, shows what is new, and installs the update with one click. It checks that the download is the exact release that was published before it replaces itself. You can turn the automatic check off in the Simulators column.\n- Update from the menu bar or the command line: Check for Updates… in the menu bar, or `simreel update`.",
+  "min_macos": "14.0",
+  "published": "2026-10-20",
+  "signature": "tGtJFnLrsxRTsTQuOAYsotGw92yHid5Oy1RQw6XIwcYK+WHvwEGjGNvdRx/lEYZN3EYOpwwgdWbnUv/r+wyfBQ=="
+}
