@@ -9,13 +9,12 @@
 Feed any image, video, QR code or your Mac's webcam to the front and back cameras of your simulators —
 with no changes to your app.
 
-[![Latest release](https://img.shields.io/github/v/release/SolankiYogesh/simreel?display_name=tag&sort=semver)](https://github.com/SolankiYogesh/simreel/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/SolankiYogesh/simreel/total)](https://github.com/SolankiYogesh/simreel/releases)
+[![Latest version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fsolankiyogesh.github.io%2Fsimreel%2Fdownload%2Flatest.json&query=%24.version&label=download&color=blue)](https://solankiyogesh.github.io/simreel/download/)
 ![Platform: macOS 14+ (Apple Silicon)](https://img.shields.io/badge/platform-macOS%2014%2B%20%C2%B7%20Apple%20Silicon-lightgrey)
 ![Built with Rust](https://img.shields.io/badge/built%20with-Rust-orange)
 
 [Website](https://solankiyogesh.github.io/simreel/) ·
-[Download](https://github.com/SolankiYogesh/simreel/releases/latest) ·
+[Download](https://solankiyogesh.github.io/simreel/download/) ·
 [Quick start](#quick-start) ·
 [Command line](#command-line) ·
 [Platform support](#platform-support) ·
@@ -59,8 +58,8 @@ it through the normal AVFoundation APIs, exactly as it would on a device.
 - **Lives in the menu bar.** While SimReel runs, a menu bar icon shows whether it's active, with a menu for
   status, the Wi-Fi camera switch and Quit. Closing the window keeps SimReel running there.
 - **Scriptable.** A `simreel` command-line tool drives the running app, for local scripts and UI-test setup.
-- **Private by design.** Everything runs on your Mac. SimReel makes no outgoing network connections and
-  collects no data. The optional phone-camera listener is off until you turn it on.
+- **Private by design.** Everything runs on your Mac. SimReel collects no data and its only network connection is a
+  once-a-day check for updates, which you can turn off. The optional phone-camera listener is off until you turn it on.
 - **Small and fast.** A native Rust app — no Electron, no background daemons.
 
 ## Platform support
@@ -161,7 +160,7 @@ because they sit on top of those APIs.
    brew install --cask SolankiYogesh/tap/simreel
    ```
 
-   or download the latest `.dmg` from the [Releases page](https://github.com/SolankiYogesh/simreel/releases/latest),
+   or download the latest `.dmg` from the [download page](https://solankiyogesh.github.io/simreel/download/),
    open it and drag **SimReel** to **Applications**.
 2. **Open SimReel.** Your booted simulators appear on the left and are enabled automatically.
 3. **Run your app** in a simulator and open its camera screen. Pick a source in SimReel — the app sees it
@@ -179,7 +178,7 @@ for you. If you installed from the `.dmg` and macOS says SimReel "cannot be veri
 xattr -dr com.apple.quarantine /Applications/SimReel.app
 ```
 
-Verify a download with the `SHA256SUMS.txt` file attached to each release:
+Verify a download with the `SHA256SUMS.txt` file listed next to it on the download page:
 
 ```sh
 shasum -a 256 -c SHA256SUMS.txt
@@ -283,6 +282,7 @@ simreel eject  --device booted
 | `set-source [--front\|--back] (--image P \| --video P \| --camera [NAME] \| --qr TEXT \| --remote PHONE)` | Sets the source. Without `--front`/`--back` it applies to both cameras. |
 | `--fill` / `--fit`, `--fit-padding N`, `--background-color #RRGGBB` | Scaling for `--image` and `--video`. Padding is one of 0, 5, 10, 20, 30. |
 | `inject [--device UDID\|booted]` / `eject` | Enable or disable SimReel in a simulator. |
+| `update [--install]` | Checks for a newer version; with `--install` it downloads and installs it (quit the app first). |
 
 All commands print JSON and exit with a non-zero status on failure. The SimReel app must be running.
 
@@ -325,6 +325,19 @@ arrive over your local network, and nothing is sent to the internet.
 | Simulator rebooted | Keep SimReel running; it enables the simulator again within a few seconds. |
 
 Set `SIMREEL_DEBUG=1` in an app's launch environment to log barcode-detection details to its console.
+
+## Updates
+
+SimReel checks for a new version when it starts and then once a day. When there is one, a card at the top of the
+window shows what is new, with **Install and restart** and **Skip this version**. The menu bar item also says
+when an update is available, and **Check for Updates…** looks right away.
+
+Every update is signed. SimReel only installs a download whose size, checksum and signature match what was
+published, and it verifies the new app's code signature before replacing itself. The check is the only network
+connection SimReel makes. Switch **Check automatically** off in the Simulators column to stop it; you can still
+check by hand.
+
+If you installed with Homebrew you can also keep using `brew upgrade --cask simreel`.
 
 ## Limitations
 
