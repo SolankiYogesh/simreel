@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://solankiyogesh.github.io/simreel/sitemap.xml
